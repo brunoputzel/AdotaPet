@@ -1,58 +1,89 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🐾 AdotaPet CCO
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Plataforma Centralizada para Adoção de Animais e Apoio a ONGs Locais**
 
-## About Laravel
+> Projeto desenvolvido como parte da Prática Extensionista III — UNOESC Chapecó
+> Curso de Análise e Desenvolvimento de Sistemas
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📋 Sobre o Projeto
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+O AdotaPet CCO é uma plataforma web desenvolvida para conectar ONGs de proteção animal de Chapecó (SC) a potenciais adotantes, centralizando em um único ambiente os animais disponíveis para adoção na cidade.
 
-## Learning Laravel
+O problema que motivou o projeto é real: as ONGs locais divulgam seus animais de forma fragmentada, redes sociais, grupos de WhatsApp, feiras eventuais, o que reduz o alcance das campanhas e dificulta o processo para quem quer adotar. O AdotaPet CCO resolve isso reunindo tudo em um só lugar, com uma interface clara, filtros de busca e integração com PIX para doações diretas às organizações.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🎯 Funcionalidades Principais
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+- Cadastro de perfis para **Adotantes** e **ONGs/Protetores**
+- Aprovação de ONGs pelo administrador da plataforma
+- Cadastro de animais com foto, espécie, porte, sexo, idade e descrição
+- Listagem de animais disponíveis com **filtros reativos** (sem recarregamento de página)
+- Perfil completo do animal com dados da ONG responsável
+- Solicitação de adoção com redirecionamento para contato via WhatsApp ou e-mail
+- Exibição de **chave PIX** da ONG para doações diretas
+- Painel da ONG para gerenciar animais e avaliar solicitações de adoção
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🛠️ Stack Tecnológica
 
-```bash
-composer require laravel/boost --dev
+| Camada | Tecnologia |
+|--------|-----------|
+| Back-end | Laravel 11 + PHP 8.3 |
+| Front-end | Laravel Blade + Livewire 3 + TailwindCSS |
+| Banco de dados | MySQL 8 |
+| Autenticação | Laravel Breeze + Sanctum |
+| Armazenamento | Laravel Storage + S3 |
+| Infraestrutura | Docker + Git + CI/CD |
 
-php artisan boost:install
+---
+
+## 👥 Atores do Sistema
+
+- **Adotante** — busca, filtra e solicita adoção de animais
+- **ONG / Protetor** — cadastra animais e avalia solicitações de adoção
+- **Administrador** — aprova cadastros de ONGs e gerencia usuários
+
+---
+
+## 📁 Estrutura do Repositório
+
+```
+adotapet/
+├── documentacao/
+│   ├── er_conceitual.jpg
+│   ├── er_logico.jpg
+│   ├── diagrama_classes.jpg
+│   ├── caso_de_uso.jpg
+│   ├── sequencia_1_autenticacao.png
+│   ├── sequencia_2_busca.png
+│   ├── sequencia_3_adocao.png
+│   ├── atividades_1_adotante.jpg
+│   ├── atividades_2_ong.jpg
+│   └── AdotaPet_CCO_PE3_Relatorio.docx
+└── README.md
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 📐 Modelagem do Sistema
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+A documentação técnica completa está disponível na pasta [`/documentacao`](./documentacao), incluindo:
 
-## Code of Conduct
+- **ER Conceitual** — entidades, relacionamentos e cardinalidades (notação Chen)
+- **ER Lógico** — tabelas, tipos de dados e chaves em notação crow's foot
+- **Diagrama de Classes** — classes, atributos, métodos e enumerações
+- **Diagrama de Caso de Uso** — 3 atores e 15 casos de uso com include/extend
+- **Diagramas de Sequência** — 3 fluxos: autenticação, busca e adoção
+- **Diagramas de Atividades** — 2 fluxos com swim lanes: adotante e ONG
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 👨‍💻 Desenvolvedor
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Bruno Sisterhenn Putzel**
+Curso de Análise e Desenvolvimento de Sistemas — UNOESC Chapecó
+Prática Extensionista III — 2026
