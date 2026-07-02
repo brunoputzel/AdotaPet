@@ -12,8 +12,16 @@ class EnsureUserIsApproved
     {
         $user = $request->user();
 
-        if ($user && $user->isOng() && !($user->aprovada ?? false)) {
-            return redirect()->route('ong.aguardando-aprovacao');
+        if ($user && $user->isOng()) {
+            $ong = $user->ong;
+
+            if (!$ong || $ong->isPendente()) {
+                return redirect()->route('ong.aguardando-aprovacao');
+            }
+
+            if ($ong->isRecusada()) {
+                return redirect()->route('ong.recusada');
+            }
         }
 
         return $next($request);

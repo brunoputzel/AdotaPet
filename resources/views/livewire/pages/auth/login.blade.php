@@ -20,9 +20,18 @@ new #[Layout('layouts.guest')] class extends Component
 
         $user = Auth::user();
 
-        if ($user->isOng() && !($user->aprovada ?? false)) {
-            $this->redirect(route('ong.aguardando-aprovacao', absolute: false), navigate: true);
-            return;
+        if ($user->isOng()) {
+            $ong = $user->ong;
+
+            if (!$ong || $ong->isPendente()) {
+                $this->redirect(route('ong.aguardando-aprovacao', absolute: false), navigate: true);
+                return;
+            }
+
+            if ($ong->isRecusada()) {
+                $this->redirect(route('ong.recusada', absolute: false), navigate: true);
+                return;
+            }
         }
 
         $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
