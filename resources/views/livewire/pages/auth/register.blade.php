@@ -14,6 +14,7 @@ new #[Layout('layouts.guest')] class extends Component
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
+    public string $tipo_perfil = 'adotante';
 
     /**
      * Handle an incoming registration request.
@@ -24,6 +25,7 @@ new #[Layout('layouts.guest')] class extends Component
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            'tipo_perfil' => ['required', 'string', 'in:adotante,ong_protetor'],
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -32,7 +34,11 @@ new #[Layout('layouts.guest')] class extends Component
 
         Auth::login($user);
 
-        $this->redirect(route('dashboard', absolute: false), navigate: true);
+        if ($user->isOng()) {
+            $this->redirect(route('ong.aguardando-aprovacao', absolute: false), navigate: true);
+        } else {
+            $this->redirect(route('dashboard', absolute: false), navigate: true);
+        }
     }
 }; ?>
 
@@ -50,6 +56,17 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        <!-- Tipo de Perfil -->
+        <div class="mt-4">
+            <x-input-label for="tipo_perfil" :value="__('Tipo de Perfil')" />
+            <select wire:model="tipo_perfil" id="tipo_perfil" name="tipo_perfil" required
+                class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                <option value="adotante">Adotante</option>
+                <option value="ong_protetor">ONG / Protetor</option>
+            </select>
+            <x-input-error :messages="$errors->get('tipo_perfil')" class="mt-2" />
         </div>
 
         <!-- Password -->
